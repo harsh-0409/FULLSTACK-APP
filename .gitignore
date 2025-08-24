@@ -1,0 +1,111 @@
+# Eclipse
+.metadata/
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python plugin for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# CDT- autotools
+.autotools
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Annotation Processing
+.apt_generated/
+
+# Scala IDE specific (Scala & Java development for Eclipse)
+.scala_dependencies
+.worksheet
+
+# Unwanted files
+Thumbs.db
+.DS_Store
+
+# --- Node / Vite (Frontend) ---
+EMPLOYEEAPI-REACT/node_modules/
+EMPLOYEEAPI-REACT/dist/
+EMPLOYEEAPI-REACT/.vite/
+EMPLOYEEAPI-REACT/.eslintcache
+EMPLOYEEAPI-REACT/coverage/
+EMPLOYEEAPI-REACT/npm-debug.log*
+EMPLOYEEAPI-REACT/yarn-debug.log*
+EMPLOYEEAPI-REACT/yarn-error.log*
+EMPLOYEEAPI-REACT/pnpm-debug.log*
+# Frontend env files (keep examples committed)
+EMPLOYEEAPI-REACT/.env
+EMPLOYEEAPI-REACT/.env.local
+EMPLOYEEAPI-REACT/.env.*.local
+
+# --- Maven / Spring Boot (Backend) ---
+EMPLOYEEAPI-SPRINGBOOT/target/
+EMPLOYEEAPI-SPRINGBOOT/*.log
+EMPLOYEEAPI-SPRINGBOOT/.classpath
+EMPLOYEEAPI-SPRINGBOOT/.project
+EMPLOYEEAPI-SPRINGBOOT/.settings/
+EMPLOYEEAPI-SPRINGBOOT/.springBeans
+EMPLOYEEAPI-SPRINGBOOT/*.iml
+
+# --- IDEs ---
+.idea/
+*.iml
+
+# --- VS Code ---
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# --- OS & Misc ---
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*.swo
+
+# --- Build Artifacts (outside standard build dirs) ---
+*.class
+*.jar
+*.war
+
+# --- Reports ---
+coverage/
+reports/
