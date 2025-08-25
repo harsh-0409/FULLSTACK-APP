@@ -62,44 +62,23 @@ pipeline {
         stage('Deploy Backend to Tomcat') {
             steps {
                 bat '''
-                rem Try WAR deploy to external Tomcat; if no WAR, deploy executable JAR instead.
+                rem Require a WAR for external Tomcat deployment; fail if not present.
                 setlocal ENABLEDELAYEDEXPANSION
                 set WAR_FILE=
-                for %%f in (EMPLOYEEAPI-SPRINGBOOT\\target\\*.war) do set WAR_FILE=%%f
+                for %%f in (EMPLOYEEAPI-SPRINGBOOT\\target\\*.war) do set "WAR_FILE=%%f"
 
-                if defined WAR_FILE (
-                    echo WAR detected: %WAR_FILE%
-                    if exist "%WEBAPPS%\\springbootemployeeapi.war" del /Q "%WEBAPPS%\\springbootemployeeapi.war"
-                    if exist "%WEBAPPS%\\springbootemployeeapi" rmdir /S /Q "%WEBAPPS%\\springbootemployeeapi"
-                    copy /Y "%WAR_FILE%" "%WEBAPPS%\\springbootemployeeapi.war"
-                    endlocal
-                    goto :EOF
-                )
-
-                echo No WAR found in EMPLOYEEAPI-SPRINGBOOT\\target. Deploying executable JAR on port 2031...
-                set "DEPLOY_DIR=C:\\apps\\employee-api"
-                if not exist "%DEPLOY_DIR%" mkdir "%DEPLOY_DIR%"
-
-                set JAR_FILE=
-                for %%j in (EMPLOYEEAPI-SPRINGBOOT\\target\\*SNAPSHOT.jar) do set JAR_FILE=%%j
-                if not defined JAR_FILE for %%j in (EMPLOYEEAPI-SPRINGBOOT\\target\\*.jar) do set JAR_FILE=%%j
-
-                if not defined JAR_FILE (
-                    echo No JAR found to deploy in EMPLOYEEAPI-SPRINGBOOT\\target.
+                if not defined WAR_FILE (
+                    echo [ERROR] No WAR found in EMPLOYEEAPI-SPRINGBOOT\\target.
+                    echo Package Spring Boot as WAR and configure SpringBootServletInitializer for external Tomcat.
+                    echo Example (pom.xml): <packaging>war</packaging> and set spring-boot-starter-tomcat as <scope>provided</scope>.
                     endlocal
                     exit /b 1
                 )
 
-                echo Using JAR: %JAR_FILE%
-                copy /Y "%JAR_FILE%" "%DEPLOY_DIR%\\app.jar"
-
-                rem Stop any existing instance running app.jar
-                powershell -NoProfile -Command "Get-CimInstance Win32_Process ^| Where-Object { $_.CommandLine -match 'app\\.jar' } ^| ForEach-Object { Stop-Process -Id $_.ProcessId -Force }" 2>nul
-
-                rem Start new instance in background
-                powershell -NoProfile -Command "Start-Process -FilePath 'java' -ArgumentList @('-jar','-Dserver.port=2031','app.jar') -WorkingDirectory '%DEPLOY_DIR%' -WindowStyle Hidden"
-
-                echo Backend started (executable JAR). Verify on http://localhost:2031/employeeapi
+                echo Deploying WAR: %WAR_FILE%
+                if exist "%WEBAPPS%\\employee-api.war" del /Q "%WEBAPPS%\\employee-api.war"
+                if exist "%WEBAPPS%\\employee-api" rmdir /S /Q "%WEBAPPS%\\employee-api"
+                copy /Y "%WAR_FILE%" "%WEBAPPS%\\employee-api.war"
                 endlocal
                 '''
             }
