@@ -70,7 +70,7 @@ pipeline {
                 if not defined WAR_FILE (
                     echo [ERROR] No WAR found in EMPLOYEEAPI-SPRINGBOOT\\target.
                     echo HINT: Update pom.xml to set packaging=WAR and set spring-boot-starter-tomcat scope=provided.
-                    echo Also add a Servlet initializer (extends SpringBootServletInitializer) for external Tomcat.
+                    echo Also add a Servlet initializer ^(extends SpringBootServletInitializer^) for external Tomcat.
                     endlocal
                     exit /b 1
                 )
