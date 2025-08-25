@@ -1,4 +1,4 @@
 const config = {
-  url: "http://localhost:2030/employeeapi/"
+  url: window.location.origin
 }
 export default config
