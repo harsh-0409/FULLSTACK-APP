@@ -70,15 +70,15 @@ pipeline {
                 if not defined WAR_FILE (
                     echo [ERROR] No WAR found in EMPLOYEEAPI-SPRINGBOOT\\target.
                     echo Package Spring Boot as WAR and configure SpringBootServletInitializer for external Tomcat.
-                    echo Example (pom.xml): <packaging>war</packaging> and set spring-boot-starter-tomcat as <scope>provided</scope>.
+                    echo Example (pom.xml): ^<packaging^>war^</packaging^> and set spring-boot-starter-tomcat as ^<scope^>provided^</scope^>.
                     endlocal
                     exit /b 1
                 )
 
                 echo Deploying WAR: %WAR_FILE%
-                if exist "%WEBAPPS%\\employee-api.war" del /Q "%WEBAPPS%\\employee-api.war"
-                if exist "%WEBAPPS%\\employee-api" rmdir /S /Q "%WEBAPPS%\\employee-api"
-                copy /Y "%WAR_FILE%" "%WEBAPPS%\\employee-api.war"
+                if exist "%WEBAPPS%\\employeeapi.war" del /Q "%WEBAPPS%\\employeeapi.war"
+                if exist "%WEBAPPS%\\employeeapi" rmdir /S /Q "%WEBAPPS%\\employeeapi"
+                copy /Y "%WAR_FILE%" "%WEBAPPS%\\employeeapi.war"
                 endlocal
                 '''
             }
