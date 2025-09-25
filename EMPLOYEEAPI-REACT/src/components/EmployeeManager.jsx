@@ -21,7 +21,7 @@ const EmployeeManager = () => {
   const [message, setMessage] = useState('')
   const [editMode, setEditMode] = useState(false)
 
-  const baseUrl = `${config.url}/employeeapi`
+  const baseUrl = config.url
 
   useEffect(() => { fetchAllEmployees() }, [])
 

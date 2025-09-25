@@ -22,6 +22,11 @@ public class EmployeeController {
         return "Employee API - Jenkins Full Stack Demo";
     }
 
+    @GetMapping("/health")
+    public ResponseEntity<String> health() {
+        return new ResponseEntity<>("Backend is running successfully!", HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
         Employee saved = employeeService.addEmployee(employee);
